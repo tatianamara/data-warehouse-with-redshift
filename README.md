@@ -80,6 +80,9 @@ Contains all the dependencies to the project
 
 `git clone https://github.com/tatianamara/data-warehouse-with-redshift.git`
 
+#### Run the create_table.py to create all staging tables and fact and dimensions tables on Redshift  
+`python3 create_table.py`
+
 #### Run the etl.py file to load data from S3 to staging tables on Redshift and create the analytics tables in Redshift  
 `python3 etl.py`
 
