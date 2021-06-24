@@ -9,6 +9,7 @@ IAM_ROLE_ARN = config.get('IAM_ROLE', 'ARN')
 SONG_DATA = config.get('S3','SONG_DATA')
 LOG_DATA = config.get('S3','LOG_DATA')
 LOG_JSONPATH = config.get('S3','LOG_JSONPATH')
+
 # DROP TABLES
 
 staging_events_table_drop = "DROP TABLE IF EXISTS staging_events;"
@@ -139,8 +140,8 @@ songplay_table_insert = ("""INSERT INTO songplay (start_time, user_id, level, so
                                 timestamp 'epoch' + staging_events.ts * interval '0.001 second' as start_time, 
                                 staging_events.userId as user_id, 
                                 staging_events.level, 
-                                artist_name.song_id, 
-                                artist_name.artist_id, 
+                                staging_songs.song_id, 
+                                staging_songs.artist_id, 
                                 staging_events.sessionId as session_id, 
                                 staging_events.location, 
                                 staging_events.userAgent as user_agent
