@@ -10,10 +10,14 @@ def load_staging_tables(cur, conn):
         cur: database cursor.
         conn: database cunnection.   
     """
-    for query in copy_table_queries:
-        cur.execute(query)
-        conn.commit()
-        print(f'load staging table {query} successfully')
+    try:
+        for query in copy_table_queries:
+            cur.execute(query)
+            conn.commit()
+            print(f'load staging table {query} successfully')
+    except psycopg2.Error as e:
+        print("Error loading staging tables")
+        print(e)
 
 
 def insert_tables(cur, conn):
@@ -23,9 +27,14 @@ def insert_tables(cur, conn):
         cur: database cursor.
         conn: database cunnection.   
     """
-    for query in insert_table_queries:
-        cur.execute(query)
-        conn.commit()
+    try:
+        for query in insert_table_queries:
+            cur.execute(query)
+            conn.commit()
+        print(f'Insert data in fact/dimensions tables successfully')
+    except psycopg2.Error as e:
+        print("Error inserting data in fact/dimensions tables")
+        print(e)
 
 
 def main():
